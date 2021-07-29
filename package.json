@@ -1,0 +1,25 @@
+{
+  "name": "doctolib",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "dev": "concurrently \"npm start\" \"cd client && npm start\""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/joi": "^17.1.1",
+    "bcryptjs": "^2.4.3",
+    "concurrently": "^6.2.0",
+    "config": "^3.3.6",
+    "express": "^4.17.1",
+    "joi": "^17.4.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.13.2",
+    "nodemailer": "^6.6.3",
+    "nodemon": "^2.0.12",
+    "uuid": "^8.3.2"
+  }
+}

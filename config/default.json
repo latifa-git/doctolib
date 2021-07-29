@@ -1,0 +1,4 @@
+{
+   "db": "mongodb+srv://doctolib:doctolib121212@cluster0.lpe9d.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+   "secret":"latifa"
+}

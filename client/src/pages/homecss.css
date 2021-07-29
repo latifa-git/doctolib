@@ -1,0 +1,18 @@
+.back{
+    background-size: cover;
+background-position: 50%;
+outline-width:0%;
+height: 740px;
+overflow: auto;
+width: 50%;
+}
+
+.front{
+
+   margin-top: 0%; 
+}
+
+.tow{
+justify-content: space-around;
+  display: flex;
+}

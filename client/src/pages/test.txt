@@ -1,0 +1,57 @@
+//import { Button } from 'antd'
+//import React from 'react'
+//import {useSelector} from 'react-redux'
+// import { Link, useHistory } from 'react-router-dom'
+////const Adminprofile = () => {
+//     const token = useSelector(state => state.token)
+//      const logout = localStorage.removeItem(token)
+
+//     const  deleteToken = () => {
+//         localStorage.removeItem('myToken');
+//      };
+  
+//     return (
+//         <div>
+//             <h1>i am Admin</h1>
+//   {
+//       <Button onClick={this.deleteToken} type="text">Text Button</Button>
+       
+//   }
+           
+
+//         </div>
+//     )
+// }
+
+// export default Adminprofile
+
+// class Logout extends React.Component {
+
+//     deleteToken = () => {
+//        localStorage.removeItem('myToken');
+//     };
+ 
+//     render(){
+//        return (
+//           <button onClick={this.deleteToken}>Logout</button>   
+//        );
+//      }
+//    }
+ 
+//    import React, { Component } from 'react'
+   
+//    export class Adminprofile extends Component {
+//     deleteToken = () => {
+//                localStorage.removeItem('token');
+//             };
+//        render() {
+
+//            return (
+//                <div>
+//                   <Button onClick={this.deleteToken} type="text">Text Button</Button> 
+//                </div>
+//            )
+//        }
+//    }
+   
+//    export default Adminprofile

@@ -1,26 +1,26 @@
 const mongoose = require('mongoose');
 
-const appointmentSchema = new mongoose.Schema({
-  startTime: { type: Date, required: false },
-  endTime: { type: Date, required: false },
-  doctor: { type: mongoose.Schema.Types.ObjectId, required: true },
-  client: { type: mongoose.Schema.Types.ObjectId, required: true },
-  status: {
-    type: String,
-    lowercase: true,
-    enum: ['accepted', 'pending', 'declined'],
-    required: true,
-    default: 'pending',
-  },
-  createDate: {
-    type: Date,
-    default: Date.now,
-  },
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
-  },
-});
+const Schema = mongoose.Schema;
 
-const Session = mongoose.model('appointment', appointementSchema);
-module.exports = Session;
+const appointmentSchema = new Schema({
+  email: { 
+    type: String, 
+    require: false 
+  },
+  firstName: { 
+    type: String, 
+    require: false
+  },
+  lastName: { 
+    type: String, 
+    require: false 
+  },
+  slot: { 
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: 'slot'
+  }
+}, { versionKey: false })
+
+const appointmentModel = mongoose.model('appointment', appointmentSchema);
+
+module.exports = appointmentModel;

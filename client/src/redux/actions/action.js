@@ -33,7 +33,7 @@ export const login = (user) => async (dispatch) => {
     type: LOGIN,
   });
   try {
-    let  res = await  axios.post("/login/loginpatient", user);
+    let  res = await  axios.post("/login/login", user);
     localStorage.setItem("token", res.data.token);
     dispatch({
       type: LOGIN_SUCCESS,

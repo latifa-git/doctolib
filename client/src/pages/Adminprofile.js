@@ -1,30 +1,32 @@
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-import { Button } from "antd";
-import { logoutAction } from "../redux/actions/action";
+// import React from "react";
+// import { useSelector, useDispatch } from "react-redux";
+// import { Link } from "react-router-dom";
+// import { Button } from "antd";
+// import { logoutAction } from "../redux/actions/action";
 
-const Adminprofile = () => {
-  const dispatch = useDispatch();
-  //const token = useSelector((state) => state.token);
+// const Adminprofile = () => {
+//   const dispatch = useDispatch();
+//   //const token = useSelector((state) => state.token);
 
-  const handelSubmit = (e) => {
-    e.preventDefault();
-    dispatch(logoutAction());
-  };
+//   const handelSubmit = (e) => {
+//     e.preventDefault();
+//     dispatch(logoutAction());
+//   };
+//   const handleInvalidToken = e => {
+//         if (e.key === 'token')
 
-  return (
-    <div>
-       <h1>hi admin</h1>
-      <Link to={"SignIn"}>
-        <Button onClick={handelSubmit} type="text"></Button>
-        log out
-      </Link>
-    </div>
-  );
-};
+//   return (
+//     <div>
+//        <h1>hi admin</h1>
+//       <Link to={"SignIn"}>
+//         <Button onClick={handelSubmit} type="text"></Button>
+//         log out
+//       </Link>
+//     </div>
+//   );
+// };
 
-export default Adminprofile;
+// export default Adminprofile;
 
 // import React from 'react'
 // import {useEffect} from 'react-redux'

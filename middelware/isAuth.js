@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const User = require("../models/patient");
+const User = require("../models/user");
 const config = require("config");
 const secret = config.get("secret");
 

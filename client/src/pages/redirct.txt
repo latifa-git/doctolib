@@ -1,4 +1,4 @@
- (token.role === "patient" )  ? ( <Redirect to="/Patientprofile" /> )                
+ (token.role === "patient" )  ? ( <Redirect to="/Patientprofile" />  )                
        : (token.role === "doctor" ) ?( <Redirect to="/Doctorprofile" />)            
            : ( token.role === "Admin") ? (<Redirect to="/Adminprofile" />  
          ): ("nothing")

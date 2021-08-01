@@ -1,4 +1,4 @@
 {
-   "db": "mongodb+srv://doctolib:doctolib121212@cluster0.lpe9d.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+   "db": "mongodb://doctolib:doctolib121212@cluster0-shard-00-00.lpe9d.mongodb.net:27017,cluster0-shard-00-01.lpe9d.mongodb.net:27017,cluster0-shard-00-02.lpe9d.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-q19yxq-shard-0&authSource=admin&retryWrites=true&w=majority",
    "secret":"latifa"
 }

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import { Form, Input, DatePicker, Switch, Button, Radio, } from 'antd';
+import CalendarView from './CalendarView';
 
 const AppointmentForm = (props) => {
   const [input, setInput] = useState({
@@ -16,7 +17,7 @@ const AppointmentForm = (props) => {
 
   const slotsAM = ['8:00-9:00', '9:00-10:00', '10:00-11:00', '11:00-12:00'];
   const slotsPM = ['1:00-2:00', '2:00-3:00', '3:00-4:00', '4:00-5:00'];
-  const baseUrl = 'http://localhost:5000';
+ 
 
   const changeHandler = event => {
     setError('');
@@ -51,7 +52,7 @@ const AppointmentForm = (props) => {
   const submitHandler = event => {
     event.preventDefault();
     if (validateInput()) {
-      axios.post(`${baseUrl}/appointments`, input)
+      axios.post("/appointments/", input)
         .then(response => {
           console.log('success adding appointment:', response);
           setInput({
@@ -70,6 +71,10 @@ const AppointmentForm = (props) => {
   }
 
   return (
+    
+    <div>
+      <div style={{margin:"10%"}}><CalendarView/></div>
+       <div style={{marginLeft:"30%"}}>
     <Form className='appt-form' onSubmit={submitHandler}>
       <Input name='email' value={input.email} placeholder='Email' onChange={changeHandler} />
       <Input name='firstName' value={input.firstName} placeholder='First name' onChange={changeHandler} />
@@ -88,6 +93,10 @@ const AppointmentForm = (props) => {
       {error && <div>{error}</div>}
       <Button onClick={submitHandler}>Submit</Button>
     </Form>
+    </div>
+    </div>
+   
+   
   )
 }
 

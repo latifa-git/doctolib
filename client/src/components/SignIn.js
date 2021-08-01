@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import {Redirect} from "react-router-dom"
+import {Redirect, Route} from "react-router-dom"
 import { Form, Input, Button, Checkbox } from "antd";
 import { useDispatch,useSelector } from "react-redux";
 import { login } from "../redux/actions/action";
-
+import { useHistory } from "react-router-dom";
+import isAuth from '../components/isAuth'
 const SignIn = () => {
   const onFinish = (values) => {
     console.log("Success:", values);
@@ -12,16 +13,18 @@ const SignIn = () => {
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
-const {token} = useSelector(state => state)
+const {token , id} = useSelector(state => state)
   console.log(token)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   
   const dispatch = useDispatch();
 
+  
   const handelSubmit = (e) => {
     e.preventDefault();
     dispatch(login({  email, password }));
+
   };
   
     //const token = localStorage.getItem('token');
@@ -96,10 +99,11 @@ const {token} = useSelector(state => state)
         <Button type="primary" htmlType="submit" onClick={handelSubmit}>
           Submit 
         </Button>
-        (token.role === "patient" )  ? ( <Redirect to="/Patientprofile" />  )                
-       : (token.role === "doctor" ) ?( <Redirect to="/Doctorprofile" />)            
-           : ( token.role === "Admin") ? (<Redirect to="/Adminprofile" />  
-         ): ("nothing")  
+        <Route path="/dashboard" render={() => (isAuth() ? <Redirect to={`/Adminprofile/${id}`} /> : ("nothing"))} />
+        {/* (token.role === "patient" )  ? ( <Redirect to={`/Patientprofile/${id}`} />  )                
+       : (token.role === "doctor" ) ?( <Redirect to={`/Doctorprofile/${id}`} />)            
+           : ( token.role === "Admin") ? (<Redirect to ={`/Adminprofile/${id}`} />  
+         ): ("nothing")   */}
       </Form.Item>
  
      

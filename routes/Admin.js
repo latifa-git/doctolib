@@ -7,7 +7,7 @@ const router = express.Router()
 
 
 // Get all users
-router.get("/alluser",auth,checkRole(["Admin"]),getAllUsers)
+router.get("/alluser",checkRole(["Admin"]),getAllUsers)
 
 //update a doctor details
 //router.put("/:id",auth,checkRole(["Admin"]),updateDoctor)

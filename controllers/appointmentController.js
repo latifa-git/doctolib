@@ -6,8 +6,7 @@ const slotModel = require('../models/slotModel');
 module.exports = {
   findAllAppointments,
   addAppointment,
-  editAppointment,
-  deleteAppointment
+ 
 }
 
 function findAllAppointments(req, res) {
@@ -52,54 +51,3 @@ function addAppointment (req, res) {
   })
 }
 
-function editAppointment(req, res) {
-  const id = req.params.id;
-  const input = req.body;
-
-  appointmentModel.findOne({ _id: id}, (error, data) => {
-    if (error) {
-      res.status(500).json({ 
-        message: 'error fetching appointment',
-        error: error
-      });
-    } else if (!data) {
-      res.status(404).json({ 
-        message: 'no appointment of such id exists',
-      });
-    }
-
-    const updatedAppointment = data;
-    updatedAppointment.email = input.email;
-    updatedAppointment.firstName = input.firstName;
-    updatedAppointment.lastName = input.lastName;
-    updatedAppointment.slots = input.slots;
-
-    updatedAppointment.save((error1, data1) => {
-      if (error1) {
-        res.status(500).json({ 
-          message: 'error updating appointment',
-          error: error1
-        });
-      } else {
-        res.status(201).json(data1);
-      }
-    })
-  })
-}
-
-function deleteAppointment(req, res) {
-  const id = req.params.id;
-
-  appointmentModel.findOneAndRemove({ _id: id }, (error, data) => {
-    if (error) {
-      res.status(500).json({ 
-        message: 'error deleting appointment',
-        error: error
-      });
-    } else if (!data) {
-      res.status(404).json('no appointment of such id exists')
-    } else {
-      res.status(200).json({ removed: data });    
-    }
-  })
-}

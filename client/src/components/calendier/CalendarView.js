@@ -10,7 +10,7 @@ const CalendarView = () => {
   //const baseUrl = 'http://localhost:5000';
 
   useEffect(() => {
-    axios.get("localhost:5000/slots/get")
+    axios.get("/slots/get")
       .then(response => {
         console.log('fetching slots success: ', response);
         setSlots(response.data);

@@ -1,59 +1,47 @@
-// import React from "react";
-// import { useSelector, useDispatch } from "react-redux";
-// import { Link } from "react-router-dom";
-// import { Button } from "antd";
-// import { logoutAction } from "../redux/actions/action";
+import React from 'react'
+import {useSelector } from "react-redux";
+import { Button } from "antd";
 
-// const Adminprofile = () => {
-//   const dispatch = useDispatch();
-//   //const token = useSelector((state) => state.token);
 
-//   const handelSubmit = (e) => {
-//     e.preventDefault();
-//     dispatch(logoutAction());
-//   };
-//   const handleInvalidToken = e => {
-//         if (e.key === 'token')
 
-//   return (
-//     <div>
-//        <h1>hi admin</h1>
-//       <Link to={"SignIn"}>
-//         <Button onClick={handelSubmit} type="text"></Button>
-//         log out
-//       </Link>
-//     </div>
-//   );
-// };
+const  Adminprofile = () => {
+    const {token } = useSelector(state => state)
 
-// export default Adminprofile;
+    const handleClick = () =>{
+        fetch("/appointments/")
+        .then(results => {
+          return results.json();
+        })
+        .then(data => {
+          let users
+    = data.map((user) => {
+            console.log("user ", user);
+            return (
+              <li>{user}</li>
+            );
+          })
+          // this.setState({users: users});
+          return (
+            <ol>
+              {users}
+            </ol>
+          );
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+      }
+    
+    return (
+        <div>
+            <h1>hi {token.name}</h1>
+         <h3> list of patients allready register</h3>
+       
+         <h3> list of doctors allready exist</h3>
+         <h3> list of appointment</h3>
+         <Button onClick={handleClick} type="text">get all appointments</Button> 
+        </div>
+    )
+}
 
-// import React from 'react'
-// import {useEffect} from 'react-redux'
-// import { logoutAction } from '../redux/actions/action'
-// const Adminprofile = () => {
-
-//     useEffect(() => {
-//         const handleInvalidToken = e => {
-//           if (e.key === 'token' && e.oldValue && !e.newValue) {
-//             // Your logout logic here
-
-//             console.log(e)
-//             logoutAction(history);
-
-//           }
-//         }
-//         window.addEventListener('storage', handleInvalidToken)
-//         return function cleanup() {
-//           window.removeEventListener('storage', handleInvalidToken)
-//         }
-//       }, [logoutAction])
-
-//     return (
-//         <div>
-
-//         </div>
-//     )
-// }
-
-// export default Adminprofile
+export default Adminprofile

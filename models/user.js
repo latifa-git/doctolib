@@ -13,7 +13,7 @@ const userSchema = mongoose.Schema({
     required: false,
   },
 
-  pasword: {
+  password: {
     type: String,
     required: false,
   },
@@ -31,7 +31,14 @@ const userSchema = mongoose.Schema({
     default: "patient",
     enum: ["patient", "doctor", "Admin"],
   },
- 
+  gender: {
+    type: String,
+    required: false,
+  },
+  address: {
+    type: String,
+    required: false,
+  },
 
 });
 module.exports = mongoose.model("User", userSchema);

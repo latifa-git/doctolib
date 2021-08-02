@@ -28,17 +28,24 @@ export const register = (newUser) => async (dispatch) => {
   }
 };
 
-export const login = (user) => async (dispatch) => {
+export const login = (user,router) => async (dispatch) => {
   dispatch({
     type: LOGIN,
   });
   try {
-    let  res = await  axios.post("/login/login", user);
+    let res = await axios.post("/login/login", user);
     localStorage.setItem("token", res.data.token);
-    dispatch({
+    console.log(res.data)
+    await dispatch({
       type: LOGIN_SUCCESS,
       payload: res.data,
     });
+    if (res.data.role==="Admin"){
+    router.push("/Adminprofile");}
+    else if (res.data.role==="doctor"){
+        router.push("/Doctorprofile");}
+      else 
+      {router.push("/Patientprofile")}
   } catch (error) {
     dispatch({
       type: LOGIN_FAIL,

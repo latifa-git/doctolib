@@ -21,9 +21,9 @@ function App() {
       <Route exact path="/" component= {Home}/>
 <Route  path="/SignUp" exact render= {(props)=> <SignUp/>}/>
 <Route exact path="/SignIn" render= {(props)=> <Home/>}/>
-<Route exact path="/Adminprofile" component={Adminprofile}/>
+<Route exact path="/Adminprofile/:id" component={Adminprofile}/>
 <Route exact path="/Patientprofile/:id" component={Patientprofile}/>
-<Route exact path="/Doctorprofile" component={Doctorprofile}/>  
+<Route exact path="/Doctorprofile/:id" component={Doctorprofile}/>  
 <Route exact path="/SignIn" component={SignIn}/>  
 
       <Route exact path='/calendar' component={CalendarView} />

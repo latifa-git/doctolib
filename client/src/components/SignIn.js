@@ -1,10 +1,14 @@
 import React, { useState } from "react";
-import {Redirect, Route} from "react-router-dom"
+import {Redirect, Route , useHistory} from "react-router-dom"
 import { Form, Input, Button, Checkbox } from "antd";
 import { useDispatch,useSelector } from "react-redux";
 import { login } from "../redux/actions/action";
-import { useHistory } from "react-router-dom";
+
 import isAuth from '../components/isAuth'
+
+
+
+
 const SignIn = () => {
   const onFinish = (values) => {
     console.log("Success:", values);
@@ -19,11 +23,11 @@ const {token , id} = useSelector(state => state)
   const [password, setPassword] = useState("");
   
   const dispatch = useDispatch();
-
+  const history = useHistory()
   
   const handelSubmit = (e) => {
     e.preventDefault();
-    dispatch(login({  email, password }));
+    dispatch(login({  email, password }, history));
 
   };
   

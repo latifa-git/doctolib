@@ -6,6 +6,12 @@ import {
   LOGIN,
   LOGIN_SUCCESS,
   LOGOUT,
+  GET_APPOINT,
+  GET_APPOINT_SUCCESS,
+  GET_APPOINT_FAIL,
+  GET_PATIENT,
+  GET_PATIENT_SUCCESS,
+  GET_PATIENT_FAIL,
 } from "../Types";
 import axios from "axios";
 
@@ -40,8 +46,8 @@ export const login = (user,router) => async (dispatch) => {
       type: LOGIN_SUCCESS,
       payload: res.data,
     });
-    if (res.data.role==="Admin"){
-    router.push("/Adminprofile");}
+    if (res.data.roille==="Admin"){
+    router.push("/Adminprofe");}
     else if (res.data.role==="doctor"){
         router.push("/Doctorprofile");}
       else 
@@ -59,3 +65,28 @@ export const logoutAction = (history) => dispatch => {
   dispatch({ type: LOGOUT });
   history.push('/SignUp')
 };
+
+
+export const getAppointList = () => async (dispatch) => {
+  await dispatch({ type: GET_APPOINT });
+  try {
+    const appoint = await axios.get('/appointments/');
+    dispatch({ type: GET_APPOINT_SUCCESS, payload: appoint.data });
+
+  } catch (error) {
+    dispatch({ type: GET_APPOINT_FAIL, payload: error.response.data })
+  }
+};
+
+
+
+export const getPatientList = () => async (dispatch) => {
+  await dispatch({ type: GET_PATIENT });
+  try {
+    const patient = await axios.get('/getusers/alluser');
+    dispatch({ type: GET_PATIENT_SUCCESS, payload: patient.data });
+
+  } catch (error) {
+    dispatch({ type: GET_PATIENT_FAIL, payload: error.response.data })
+  }
+}

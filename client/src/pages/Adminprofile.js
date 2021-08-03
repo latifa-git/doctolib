@@ -1,47 +1,36 @@
-import React from 'react'
-import {useSelector } from "react-redux";
-import { Button } from "antd";
 
+import React , {useEffect} from 'react'
+import {useSelector, useDispatch} from "react-redux"
+import { getAppointList, getPatientList } from '../redux/actions/action';
 
+function Adminprofile() {
+ // const {token} = useSelector(state => state)
+  const appoint = useSelector((state) => state.Appoint_reducer)
+  const dispatch = useDispatch();
+  useEffect(() => {
+      dispatch(getAppointList())
+  }, [dispatch])
+ 
 
-const  Adminprofile = () => {
-    const {token } = useSelector(state => state)
+  const {patient} = useSelector((state) => state.Patient_reducer)
+  
+  useEffect(() => {
+      dispatch(getPatientList())
+  }, [dispatch])
+  
 
-    const handleClick = () =>{
-        fetch("/appointments/")
-        .then(results => {
-          return results.json();
-        })
-        .then(data => {
-          let users
-    = data.map((user) => {
-            console.log("user ", user);
-            return (
-              <li>{user}</li>
-            );
-          })
-          // this.setState({users: users});
-          return (
-            <ol>
-              {users}
-            </ol>
-          );
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
-      }
-    
-    return (
-        <div>
-            <h1>hi {token.name}</h1>
-         <h3> list of patients allready register</h3>
-       
-         <h3> list of doctors allready exist</h3>
-         <h3> list of appointment</h3>
-         <Button onClick={handleClick} type="text">get all appointments</Button> 
-        </div>
-    )
+  
+  return (
+    <div>
+      
+      <h1> hi </h1>
+
+ {patient.map((el)=> <div><li>{el.name}</li></div>)}
+ {appoint.map((el)=><div>{el.firstName} </div>)}
+  
+   
+    </div>
+  )
 }
 
 export default Adminprofile

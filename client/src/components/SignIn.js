@@ -103,7 +103,7 @@ const {token , id} = useSelector(state => state)
         <Button type="primary" htmlType="submit" onClick={handelSubmit}>
           Submit 
         </Button>
-        <Route path="/dashboard" render={() => (isAuth() ? <Redirect to={`/Adminprofile/${id}`} /> : ("nothing"))} />
+        {/* <Route path="/dashboard" render={() => (isAuth() ? <Redirect to={`/Adminprofile/${id}`} /> : ("nothing"))} /> */}
         {/* (token.role === "patient" )  ? ( <Redirect to={`/Patientprofile/${id}`} />  )                
        : (token.role === "doctor" ) ?( <Redirect to={`/Doctorprofile/${id}`} />)            
            : ( token.role === "Admin") ? (<Redirect to ={`/Adminprofile/${id}`} />  

@@ -1,7 +1,7 @@
 const express = require("express");
 const {getAllUsers,updateDoctor,addDoctor} = require("../controllers/admincontroller");
 //const auth = require("../middelware/auth");
-const checkRole = require("../middelware/authRole");
+//const checkRole = require("../middelware/authRole");
 const router = express.Router()
 
 
@@ -10,10 +10,10 @@ const router = express.Router()
 router.get("/alluser",getAllUsers)
 
 //update a doctor details
-//router.put("/:id",auth,checkRole(["Admin"]),updateDoctor)
+router.put("/:id",updateDoctor)
 
 // add doctor
-router.post("/adddoctor",checkRole(["Admin"]),addDoctor)
+router.post("/adddoctor",addDoctor)
 
 // delete doctor(missed)
 

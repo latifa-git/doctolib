@@ -12,6 +12,9 @@ import {
   GET_PATIENT,
   GET_PATIENT_SUCCESS,
   GET_PATIENT_FAIL,
+  ADD_DOCTOR,
+  ADD_DOCTOR_SUCCESS,
+  ADD_DOCTOR_FAIL,
 } from "../Types";
 import axios from "axios";
 
@@ -46,8 +49,8 @@ export const login = (user,router) => async (dispatch) => {
       type: LOGIN_SUCCESS,
       payload: res.data,
     });
-    if (res.data.roille==="Admin"){
-    router.push("/Adminprofe");}
+    if (res.data.role==="Admin"){
+    router.push("/Adminprofile");}
     else if (res.data.role==="doctor"){
         router.push("/Doctorprofile");}
       else 
@@ -88,5 +91,16 @@ export const getPatientList = () => async (dispatch) => {
 
   } catch (error) {
     dispatch({ type: GET_PATIENT_FAIL, payload: error.response.data })
+  }
+};
+
+
+export const addDoctor = (product) => async (dispatch) => {
+  dispatch({ type: ADD_DOCTOR });
+  try {
+    const doctor = await axios.post('/add/adddoctor');
+    await dispatch({ type: ADD_DOCTOR_SUCCESS, payload: doctor.response })
+  } catch (error) {
+    await dispatch({ type: ADD_DOCTOR_FAIL, payload: error.response.data });
   }
 }

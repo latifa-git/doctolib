@@ -1,7 +1,10 @@
 const User = require("../models/user");
+const bcrypt = require("bcryptjs");
+const config = require("config");
+const secret = config.get("secret");
+const jwt = require("jsonwebtoken");
 
 const { registerValidation } = require("../validation/doctorvalidation");
-
 
 
 // get All users
@@ -16,55 +19,87 @@ const getAllUsers = async (req, res) => {
   }
 };
 
+
+
+
+
 //Post a doctor
 
 const addDoctor = async (req, res) => {
-  // validate a doctor
-  if (User.roleType == "Admin") {
-  const { error } = registerValidation(req.body);
-  if (error) return res.status(400).send({ msg: error.details[0].message });
-  // Check for existant mail
-  const emailExist = await doctor.findOne({ email: req.body.email });
-  if (emailExist) return res.status(400).send({ msg: "verify your email" });
-  
- 
-  
-  const newDoctor = new doctor({
-    name: req.body.name,
-    email: req.body.email,
-    phone: req.body.phone,
-    location: req.body.location,
-    specialty: req.body.specialty,
-    password: req.body.password,
-  });
-
+  const { name, email, phone,  address, password, role , specialty} = req.body;
   try {
-    const savedDoctor = await newDoctor.save();
-    res.send(savedDoctor);
-  } catch (err) {
-    res.status(400).send(err);
+    const user = await User.findOne({ email });
+    if (user) return res.status(401).json({ msg: "user already exists" });
+    let newDoctor = new User({
+      name,
+      email,
+      phone,
+      password,
+      address,
+      specialty,
+      role
+    });
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(password, salt);
+    newDoctor.password = hash;
+    await newDoctor.save();
+    // res.status(201).json(newUser);
+    const payload = {
+      id: newDoctor._id,
+    };
+    const token = jwt.sign(payload, secret);
+    res.send({
+      token,
+      user: {
+        _id: newDoctor._id,
+        name: newDoctor.name,
+        password : newDoctor.password,
+        email: newDoctor.email,
+        phone: newDoctor.phone,
+        role: newDoctor.role,
+        address: newDoctor.address,
+        specialy: newDoctor.specialty
+      }
+    });
+  } catch (error) {
+    res.status(500).json({ errors: error.message });
   }
 };
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //update a doctor details
 const updateDoctor = async (req, res) => {
   // validate a doctor
-  const { error } = registerValidation(req.body);
+  const { error } = (req.body);
   if (error) return res.status(400).send({ msg: error.details[0].message });
 
-  const updatedDoctor = await doctor.findOneAndUpdate(
-    { user: req.params.user_id },
+  const updatedDoctor = await User.findOneAndUpdate(
+    { User: req.params.user_id },
     {
       $set: {
         name: req.body.name,
         email: req.body.email,
         phone: req.body.phone,
         specialty: req.body.specialty,
-        location: req.body.location,
+        password: req.body.password,
+        address:req.body.address
+
       },
     },
-    { new: true, useFindAndModify: false }
+  //  { new: false, useFindAndModify: true }
   );
 
   try {

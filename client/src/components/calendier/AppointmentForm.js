@@ -3,6 +3,12 @@ import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import { Form, Input, DatePicker, Switch, Button, Radio, } from 'antd';
 import CalendarView from './CalendarView';
+import 'antd/dist/antd.css';
+import './index.css';
+import { Result } from 'antd';
+import { SmileOutlined } from '@ant-design/icons';
+
+
 
 const AppointmentForm = (props) => {
   const [input, setInput] = useState({
@@ -32,7 +38,7 @@ const AppointmentForm = (props) => {
     setAM(!AM);
   }
 
-  const dateHandler = (date, datestring) => {
+  const dateHandler = (date) => {
     setError('');
     setInput({
       ...input, 
@@ -62,13 +68,19 @@ const AppointmentForm = (props) => {
             slotTime: '',
             slotDate: ''
           })
-          props.history.push('/');
+          // props.history.push('/');
         })
         .catch(error => {
           console.log('error adding appointment:', error);
         })
     }
   }
+
+
+  
+
+
+
 
   return (
     
@@ -93,6 +105,13 @@ const AppointmentForm = (props) => {
       {error && <div>{error}</div>}
       <Button onClick={submitHandler}>Submit</Button>
     </Form>
+    { (response?
+    return 
+    <Result 
+      icon={<SmileOutlined />}
+      title="Great, we have done all the operations!"
+      extra={<Button type="primary">Next</Button>}
+    />}
     </div>
     </div>
    

@@ -1,0 +1,59 @@
+.topnav{
+    display: flex;
+    justify-content: center;
+    background-color: #555452;
+    color: white;
+    padding: 10px;
+    
+}
+.navPrincipale{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 30px;
+    width: 90%;
+    padding-top: 15px;
+   
+}
+.mb-3{
+    width: 700px !important;
+    height: 20px;
+}
+.btn-nav{
+    display: flex;
+    justify-content: space-between;
+ 
+}
+a{   
+     text-decoration: none;
+     font-style: none;
+     color: rgb(89, 0, 255);
+}
+#headerOne{
+    text-decoration: none;
+    color: black;
+}
+.listnav{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    left: 0px;
+    list-style: none;
+    
+}
+li a{
+    
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 600;
+    font-style: none;
+    color: rgb(76, 0, 255);
+    font-size: large;
+    width: 100%;
+}
+
+li a:hover{
+    color: rgb(255, 0, 0);
+    text-decoration: none !important;
+}
+

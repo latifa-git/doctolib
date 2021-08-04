@@ -1,44 +1,71 @@
-
-import React , {useEffect} from 'react'
-import {useSelector, useDispatch} from "react-redux"
-import { addDoctor, getAppointList, getPatientList } from '../redux/actions/action';
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import NavigationBar from "../components/Navbar/Navbar";
+import {
+  addDoctor,
+  getAppointList,
+  getPatientList,
+} from "../redux/actions/action";
 
 function Adminprofile() {
- // const {token} = useSelector(state => state)
-  const appoint = useSelector((state) => state.Appoint_reducer)
+  // const {token} = useSelector(state => state)
+  const appoint = useSelector((state) => state.Appoint_reducer)  || [];
   const dispatch = useDispatch();
   useEffect(() => {
-      dispatch(getAppointList())
-  }, [])
- 
+    dispatch(getAppointList());
+  }, []);
 
-  const {patient} = useSelector((state) => state.Patient_reducer)
-  console.log(patient)
+  const patient = useSelector((state) => state.Patient_reducer.patient) || [];
+  const doctor = useSelector((state) => state.Patient_reducer.doctor) || [];
   useEffect(() => {
-      dispatch(getPatientList())
-  }, [])
+    dispatch(getPatientList());
+  }, [dispatch]);
+
   
-  const {doctor} = useSelector((state) => state.Doctor_Reducer)
-  
+
   useEffect(() => {
-      dispatch(addDoctor())
-  }, [])
-  
+    dispatch(addDoctor());
+  }, []);
+
   return (
     <div>
-      
+     {/* <NavigationBar/> */}
+<div>
+      {!patient ? <h2>plz wait</h2> : ""}
+
       <h1> hi </h1>
       <h1> LIST OF PATIENT </h1>
- {patient.filter(el => (el.role ==="patient")).map((el)=> <div><li>{el.name}</li></div>)}
- <h1> LIST OF APPOINTMENTS</h1>
- {/* {appoint.map((el)=><div>{el.firstName} </div>)} */}
- <h1> ADD DOCTORS </h1>
+      <div class="container">
+        {patient
+          .filter((el) => el.role === "patient")
+          .map((el) => (
+            <div class="row">
+              <div class="col"> {el._id} </div>
+              <div class="col">{el.name}</div>
+              <div class="col">{el.email}</div>
+            </div>
+          ))}
+      </div>
+      </div>
 
+      <h1>LIST OF APPOINTMENTS</h1>
 
-  
-   
+      <h1> LIST DOCTORS </h1>
+      <div>
+        <div class="container">
+          {patient
+            .filter((el) => el.role === "doctor")
+            .map((el) => (
+              <div class="row">
+                <div class="col"> {el._id} </div>
+                <div class="col">{el.name}</div>
+                <div class="col">{el.email}</div>
+              </div>
+            ))}
+        </div>
+      </div>
     </div>
-  )
+  );
 }
 
-export default Adminprofile
+export default Adminprofile;

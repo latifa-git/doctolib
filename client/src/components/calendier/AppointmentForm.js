@@ -4,13 +4,16 @@ import { withRouter } from 'react-router-dom';
 import { Form, Input, DatePicker, Switch, Button, Radio, } from 'antd';
 import CalendarView from './CalendarView';
 import 'antd/dist/antd.css';
-import './index.css';
+import '../../index.css';
 import { Result } from 'antd';
 import { SmileOutlined } from '@ant-design/icons';
+import {Alert,} from 'react-bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 
 const AppointmentForm = (props) => {
+  const [show, setShow] = useState(false);
   const [input, setInput] = useState({
     email: '',
     firstName: '',
@@ -61,6 +64,7 @@ const AppointmentForm = (props) => {
       axios.post("/appointments/", input)
         .then(response => {
           console.log('success adding appointment:', response);
+          setShow(true);
           setInput({
             email: '',
             firstName: '',
@@ -105,14 +109,22 @@ const AppointmentForm = (props) => {
       {error && <div>{error}</div>}
       <Button onClick={submitHandler}>Submit</Button>
     </Form>
-    { (response?
-    return 
-    <Result 
-      icon={<SmileOutlined />}
-      title="Great, we have done all the operations!"
-      extra={<Button type="primary">Next</Button>}
-    />}
     </div>
+    <Alert show={show} variant="success">
+        <Alert.Heading>OPERATION SUCCESSFULY DONE!</Alert.Heading>
+        <p>
+         your appointment is successfuly reqistred.
+        </p>
+        <hr />
+        <div className="d-flex justify-content-end">
+          <Button onClick={() => setShow(false)} variant="outline-success">
+            Close me y'all!
+          </Button>
+        </div>
+      </Alert>
+
+      {/* {!show && <Button onClick={() => setShow(true)}>Show Alert</Button>} */}
+
     </div>
    
    

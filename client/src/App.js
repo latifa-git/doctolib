@@ -9,6 +9,8 @@ import Adminprofile from './pages/Adminprofile';
 import Doctorprofile from './pages/Doctorprofile';
 import Patientprofile from './pages/Patientprofile';
 import SignIn from './components/SignIn';
+import NavigationBar from './components/Navbar/Navbar';
+
 //import SignIn from './components/SignIn';
 
 
@@ -25,9 +27,7 @@ function App() {
 <Route exact path="/Patientprofile/" component={Patientprofile}/>
 <Route exact path="/Doctorprofile/" component={Doctorprofile}/>  
 <Route exact path="/SignIn" component={SignIn}/>  
-
-      <Route exact path='/calendar' component={CalendarView} />
-      <Route exact path='/create-appt' component={AppointmentForm} />
+<Route exact path="/navbar" component={NavigationBar}/> 
 
 
     </Switch>
